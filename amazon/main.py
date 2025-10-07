@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import os
 import re
+import time
 
-
-def get_html(url):
+def get_cached_html(url):
     # Get the directory where the current script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
     print(f"Script directory {script_dir}")
@@ -26,6 +26,10 @@ def get_html(url):
             file.write(html.text)
             return html
     
+
+def get_html(url):
+    html = requests.get(url)
+    return html.text
 
 """
 # Find first matching element
@@ -63,23 +67,34 @@ element.get('attribute_name', 'default_value')  # With default value
 element.attrs                      # Get all attributes as dict 
 """
 
-html = get_html("https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG") 
+def scrapeAmazon(soup):
+    print(f"page title : {soup.find("title").text}")
+    print(f"product title {soup.select("#productTitle")[0].text.strip()}") 
+    print(f"price of product : {soup.find(class_='a-price-whole').text}") 
+    # getting list of images
+    imageElements = soup.select("div#altImages > ul > li.item:not(.videoBlockIngress)")
+    print(f"size of image list = {len(imageElements)}")
+
+    for image in imageElements:
+        imageThumbLink = image.find("img").get('src')
+        imageUrl = imageThumbLink.replace("._SS40_","")
+        print(f"{imageUrl} \n")
+        
+
+    # product details
+    productDetails = soup.select("li.a-spacing-mini > span.a-list-item")
+    for detail in productDetails:
+        print(detail.text.strip())
+
+
+start = time.time()
+url = "https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG"
+html = get_cached_html(url)
 soup = BeautifulSoup(html,"lxml")
-print(f"page title : {soup.find("title").text}")
-print(f"product title {soup.select("#productTitle")[0].text.strip()}") 
-print(f"price of product : {soup.find(class_='a-price-whole').text}") 
-# getting list of images
-imageElements = soup.select("div#altImages > ul > li.item:not(.videoBlockIngress)")
-print(f"size of image list = {len(imageElements)}")
 
-for image in imageElements:
-    imageThumbLink = image.find("img").get('src')
-    imageUrl = imageThumbLink.replace("._SS40_","")
-    print(f"{imageUrl} \n")
-    
+if "amazon" in url:
+    scrapeAmazon(soup)
+else:
+    print("url is not from amazon")
 
-# product details
-productDetails = soup.select("li.a-spacing-mini > span.a-list-item")
-print(len(productDetails))
-for detail in productDetails:
-    print(detail.text.strip())
+print(f"finished in {time.time() - start} seconds")
