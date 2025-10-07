@@ -4,6 +4,21 @@ import os
 import re
 import time
 
+
+start = time.time()
+# url = "https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG"
+url = "https://www.amazon.in/Apple-iPhone-15-128-GB/dp/B0CHX1W1XY"
+html = get_cached_html(url)
+soup = BeautifulSoup(html,"lxml")
+
+if "amazon" in url:
+    scrapeAmazon(soup)
+else:
+    scrapeAll(soup)
+
+print(f"finished in {time.time() - start} seconds")
+
+###########################################################
 headers = {
     "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     "accept-language":"en-US,en;q=0.9",
@@ -96,18 +111,3 @@ def scrapeAmazon(soup):
 def scrapeAll(soup: BeautifulSoup):
     soup.find("title").text
 
-
-
-
-start = time.time()
-# url = "https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG"
-url = "https://www.amazon.in/Apple-iPhone-15-128-GB/dp/B0CHX1W1XY"
-html = get_cached_html(url)
-soup = BeautifulSoup(html,"lxml")
-
-if "amazon" in url:
-    scrapeAmazon(soup)
-else:
-    scrapeAll(soup)
-
-print(f"finished in {time.time() - start} seconds")
