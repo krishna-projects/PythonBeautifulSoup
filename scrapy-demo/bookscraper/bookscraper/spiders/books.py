@@ -13,7 +13,7 @@ class BooksSpider(scrapy.Spider):
                 'price': book.css('p.price_color::text').get(),
                 'availability': book.css('p.availability::text')[1].get().strip(),
             }
-
-        next_page = response.css('li.next a::attr(href) test').get()
+            
+        next_page = response.css('li.next a::attr(href)').get()
         if next_page:
             yield response.follow(next_page, callback=self.parse)
