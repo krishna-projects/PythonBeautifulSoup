@@ -1,5 +1,5 @@
 import scrapy
-
+from bookscraper.items import QuoteItem
 
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
@@ -24,10 +24,14 @@ class QuotesSpider(scrapy.Spider):
 
     def parse_author(self, response):
         quote = response.meta['quote']
-        print(quote)
-        yield {
-            **quote,
-            'author_born_date': response.css('span.author-born-date::text').get(),
-            'author_born_location': response.css('span.author-born-location::text').get(),
-            'author_description': response.css('div.author-description::text').get().strip(),
-        }
+        item = QuoteItem()
+
+        item['text'] = quote['text']
+        item['author'] = quote['author']
+        item['tags'] = quote['tags']
+        item['author_about'] = response.css('span.author-born-date::text').get()
+        item['author_born_date'] = response.css('span.author-born-date::text').get()
+        item['author_born_location'] = response.css('span.author-born-location::text').get()
+        item['author_description'] = response.css('div.author-description::text').get().strip()
+        
+        yield item

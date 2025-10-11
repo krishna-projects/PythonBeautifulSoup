@@ -1,5 +1,5 @@
 import scrapy
-
+from bookscraper.items import BookscraperItem
 
 class BooksSpider(scrapy.Spider):
     name = "books"
@@ -8,11 +8,13 @@ class BooksSpider(scrapy.Spider):
 
     def parse(self, response):
         for book in response.css('article.product_pod'):
-            yield {
-                'title': book.css('h3 a::attr(title)').get(),
-                'price': book.css('p.price_color::text').get(),
-                'availability': book.css('p.availability::text')[1].get().strip(),
-            }
+            item = BookscraperItem()
+
+            item['title'] = book.css('h3 a::attr(title)').get()
+            item['price'] = book.css('p.price_color::text').get()
+            item['availability'] = book.css('p.availability::text')[1].get().strip()
+
+            yield item
             
         next_page = response.css('li.next a::attr(href)').get()
         if next_page:
