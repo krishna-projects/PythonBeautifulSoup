@@ -66,6 +66,8 @@ scrapy crawl books -s DOWNLOAD_DELAY=2 -s CONCURRENT_REQUESTS=4
 
 # Run with specific output format
 scrapy crawl books -o books.jl  # JSON Lines format
+
+scrapy crawl books -o books.jl -s CLOSESPIDER_ITEMCOUNT=100
 ```
 
 ## 🔍 Spider Development
