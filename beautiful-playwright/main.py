@@ -3,22 +3,9 @@ import requests
 import os
 import re
 import time
+from scraper import get_html_with_playwright
 
-
-start = time.time()
-# url = "https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG"
-url = "https://www.amazon.in/Apple-iPhone-15-128-GB/dp/B0CHX1W1XY"
-html = get_cached_html(url)
-soup = BeautifulSoup(html,"lxml")
-
-if "amazon" in url:
-    scrapeAmazon(soup)
-else:
-    scrapeAll(soup)
-
-print(f"finished in {time.time() - start} seconds")
-
-###########################################################
+##########################################################
 headers = {
     "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     "accept-language":"en-US,en;q=0.9",
@@ -88,7 +75,9 @@ element.get('attribute_name', 'default_value')  # With default value
 element.attrs                      # Get all attributes as dict 
 """
 
-def scrapeAmazon(soup):
+def scrapeAmazon(url):
+    html = get_cached_html(url)
+    soup = BeautifulSoup(html,"lxml")
     print(f"page title : {soup.find("title").text}")
     print(f"product title {soup.select("#productTitle")[0].text.strip()}") 
     print(f"price of product : {soup.find(class_='a-price-whole').text}") 
@@ -108,6 +97,18 @@ def scrapeAmazon(soup):
         print(detail.text.strip())
 
 
-def scrapeAll(soup: BeautifulSoup):
-    soup.find("title").text
+def scrapeAll(url):
+    soup = get_html_with_playwright(url)
+    print(soup.find("title").text)
 
+
+start = time.time()
+# url = "https://www.amazon.in/Marshall-Emberton-Wireless-Bluetooth-Portable/dp/B09XXW54QG"
+url = "https://shop.lululemon.com/p/mens-jackets-and-hoodies-hoodies/Mens-Big-Cozy-Crew/_/prod20004311?color=33454"
+
+if "amazon" in url:
+    scrapeAmazon(url)
+elif "lululemon" in url:
+    scrapeAll(url)
+
+print(f"finished in {time.time() - start} seconds")
