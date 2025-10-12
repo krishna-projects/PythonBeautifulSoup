@@ -18,3 +18,23 @@
 {"title": "Mesaerion: The Best Science Fiction Stories 1800-1849", "price": "£37.59", "availability": "In stock"}
 {"title": "Libertarianism for Beginners", "price": "£51.33", "availability": "In stock"}
 {"title": "It's Only the Himalayas", "price": "£45.17", "availability": "In stock"}
+{"title": "In Her Wake", "price": "£12.84", "availability": "In stock"}
+{"title": "How Music Works", "price": "£37.32", "availability": "In stock"}
+{"title": "Foolproof Preserving: A Guide to Small Batch Jams, Jellies, Pickles, Condiments, and More: A Foolproof Guide to Making Small Batch Jams, Jellies, Pickles, Condiments, and More", "price": "£30.52", "availability": "In stock"}
+{"title": "Chase Me (Paris Nights #2)", "price": "£25.27", "availability": "In stock"}
+{"title": "Black Dust", "price": "£34.53", "availability": "In stock"}
+{"title": "Birdsong: A Story in Pictures", "price": "£54.64", "availability": "In stock"}
+{"title": "America's Cradle of Quarterbacks: Western Pennsylvania's Football Factory from Johnny Unitas to Joe Montana", "price": "£22.50", "availability": "In stock"}
+{"title": "Aladdin and His Wonderful Lamp", "price": "£53.13", "availability": "In stock"}
+{"title": "Worlds Elsewhere: Journeys Around Shakespeare’s Globe", "price": "£40.30", "availability": "In stock"}
+{"title": "Wall and Piece", "price": "£44.18", "availability": "In stock"}
+{"title": "The Four Agreements: A Practical Guide to Personal Freedom", "price": "£17.66", "availability": "In stock"}
+{"title": "The Five Love Languages: How to Express Heartfelt Commitment to Your Mate", "price": "£31.05", "availability": "In stock"}
+{"title": "The Elephant Tree", "price": "£23.82", "availability": "In stock"}
+{"title": "The Bear and the Piano", "price": "£36.89", "availability": "In stock"}
+{"title": "Sophie's World", "price": "£15.94", "availability": "In stock"}
+{"title": "Penny Maybe", "price": "£33.29", "availability": "In stock"}
+{"title": "Maude (1883-1993):She Grew Up with the country", "price": "£18.02", "availability": "In stock"}
+{"title": "In a Dark, Dark Wood", "price": "£19.63", "availability": "In stock"}
+{"title": "Behind Closed Doors", "price": "£52.22", "availability": "In stock"}
+{"title": "You can't bury them all: Poems", "price": "£33.63", "availability": "In stock"}
