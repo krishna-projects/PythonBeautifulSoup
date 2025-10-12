@@ -6,7 +6,36 @@ class BooksSpider(scrapy.Spider):
     allowed_domains = ["books.toscrape.com"]
     start_urls = ["https://books.toscrape.com"]
 
+    # Custom settings for this spider
+    # custom_settings = {
+    #     'DEFAULT_REQUEST_HEADERS': {
+    #         'Referer': 'https://www.google.com/',
+    #     }
+    # }
+
+
+    def start_requests(self):
+        headers = {
+            'X-Custom-Header': 'custom-header-value',
+            # Other headers you want to add/override
+        }
+        
+        # Get default headers from settings
+        default_headers = self.settings.getdict('DEFAULT_REQUEST_HEADERS', {})
+        
+        # Merge headers (custom headers take precedence)
+        final_headers = {**default_headers, **headers}
+        
+        for url in self.start_urls:
+            # Log request headers for debugging
+            self.logger.info(f"Request URL from start_requests: {url}")
+            yield scrapy.Request(url,headers=final_headers,callback=self.parse)
+
+
     def parse(self, response):
+         # Log request headers for debugging
+        self.logger.info(f"Request Headers from parse: {response.request.headers}")
+        
         for book in response.css('article.product_pod'):
             item = BookscraperItem()
 
