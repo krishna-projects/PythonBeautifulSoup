@@ -28,14 +28,17 @@ class BooksSpider(scrapy.Spider):
         
         for url in self.start_urls:
             # Log request headers for debugging
+            # or directly use extra headers
             self.logger.info(f"Request URL from start_requests: {url}")
-            yield scrapy.Request(url,headers=final_headers,callback=self.parse)
+            yield scrapy.Request(url,headers={'extra-header': 'test'},callback=self.parse)
 
 
     def parse(self, response):
          # Log request headers for debugging
         self.logger.info(f"Request Headers from parse: {response.request.headers}")
-        
+        self.logger.info(f"Response type: {type(response.body)}")
+        self.logger.info(f"Response preview: {response.body[:200]}")
+            
         for book in response.css('article.product_pod'):
             item = BookscraperItem()
 
