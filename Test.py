@@ -7,4 +7,6 @@ def factorial(i):
 
 
 
-print(factorial(500))
+fact=factorial(300)
+print(type(fact))
+print(fact)

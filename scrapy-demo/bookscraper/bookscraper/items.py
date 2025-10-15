@@ -23,3 +23,14 @@ class QuoteItem(scrapy.Item):
     author_born_location = scrapy.Field()
     author_description = scrapy.Field()
     tags = scrapy.Field()
+
+
+class ProductItem(scrapy.Item):
+    title = scrapy.Field()
+    price = scrapy.Field()
+    color = scrapy.Field()
+    description = scrapy.Field()
+    available_colors = scrapy.Field()
+    size_chart = scrapy.Field()
+    url = scrapy.Field()
+    content = scrapy.Field()
