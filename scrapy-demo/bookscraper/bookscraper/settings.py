@@ -109,5 +109,5 @@ DOWNLOAD_HANDLERS = {
 # Optional: Set Playwright settings
 PLAYWRIGHT_BROWSER_TYPE = 'chromium'
 PLAYWRIGHT_LAUNCH_OPTIONS = {
-    'headless': False,
+    'headless': True,
 }
