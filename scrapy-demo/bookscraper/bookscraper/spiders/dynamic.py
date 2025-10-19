@@ -3,7 +3,6 @@ from scrapy.spiders import Spider
 from urllib.parse import urlparse
 from bookscraper.items import ProductItem
 from scrapy_playwright.page import PageMethod
-from bs4 import BeautifulSoup
 
 class DynamicSpider(Spider):
     name = "dynamic"
@@ -13,7 +12,7 @@ class DynamicSpider(Spider):
     
     # Start with a list of URLs that might need different handlers
     start_urls = [
-        'https://quotes.toscrape.com/',
+        'https://shop.lululemon.com/p/womens-sweatpants/Scuba-MR-Wide-Leg-Pant-Regular/_/prod11750327?color=71195',
     ]
     
     def start_requests(self):
@@ -54,7 +53,6 @@ class DynamicSpider(Spider):
             page = response.meta["playwright_page"]
             page.close()
 
-        title = response.css("h1 a::text").get()
+        title = response.css("h1 > div::text").getall()
         self.logger.info(f"Title: {title}")
         
-       
