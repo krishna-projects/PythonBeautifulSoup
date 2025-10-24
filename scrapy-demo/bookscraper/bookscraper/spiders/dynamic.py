@@ -53,6 +53,10 @@ class DynamicSpider(Spider):
             page = response.meta["playwright_page"]
             page.close()
 
-        title = response.css("h1 > div::text").getall()
-        self.logger.info(f"Title: {title}")
+        item = {
+            'title': response.css("h1 > div::text").getall(),
+            'url': response.url
+        }
+        self.logger.info(f"item: {item}")
+        yield item
         
